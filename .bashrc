@@ -1,9 +1,6 @@
 export KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty"
-export PATH="$HOME/.tmuxifier/bin:$PATH"
 
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-
-eval "$(tmuxifier init -)"
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -127,7 +124,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 
 # Load Angular CLI autocompletion.
