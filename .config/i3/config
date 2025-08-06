@@ -251,7 +251,7 @@ exec --no-startup-id xrandr --output DP-4 --primary --mode 1920x1080 --pos 0x0 -
 exec --no-startup-id xrandr --output DP-0 --mode 800x600 --pos 0x0 --output DP-4 --primary --mode 1920x1080 --pos 800x0
 
 # wallpaper
-exec_always feh --bg-scale /home/naygo/Pictures/wallpapers/ghibli-japanese-walled-garden.png 
+exec_always feh --bg-scale ~/.config/i3/wallpaper.png
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
