@@ -62,10 +62,11 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec /usr/bin/kitty 
 
 # explorer
-bindsym $mod+f exec thunar
+bindsym $mod+f exec pcmanfm
 
-# flameshot
-bindsym Print exec flameshot gui
+# spectale
+bindsym Print exec spectacle -r
+bindsym Ctrl+Shift+4 exec spectacle -r
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -212,20 +213,24 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#    colors {
-#        background #272727
-#        statusline #ebdbb2
-#        separator #fb4833
+ bar {
+    status_command i3status
+    position top
+    font pango:JetBrains Mono 10
+    separator_symbol " "
 
-#        focused_workspace  #4c7899 #d79920 #272727
-#        active_workspace   #333333 #272727 #d79920
-#        inactive_workspace #333333 #222222 #888888
-#        urgent_workspace   #2f343a #900000 #ffffff
-#        binding_mode       #2f343a #900000 #ffffff
-#    }
-# }
+    colors {
+        background #272727
+        statusline #ebdbb2
+        separator #fb4833
+
+        focused_workspace  #4c7899 #d79920 #272727
+        active_workspace   #333333 #272727 #d79920
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+ }
 
 for_window [class="calcurse-float"] floating enable, resize set 80 ppt 80 ppt, move position center
 
