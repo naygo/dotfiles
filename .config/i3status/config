@@ -4,11 +4,16 @@ general {
     interval = 5
 }
 
+order += time
 order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "disk /"
 order += "memory"
 order += "battery 0"
+
+time {
+    format = "%a %d %b %Y %H:%M |"
+}
 
 cpu_usage {
     format = "cpu: %usage"
@@ -16,7 +21,7 @@ cpu_usage {
 
 cpu_temperature 0 {
         format = "temp: %degrees °C"
-        path = "/sys/class/hwmon/hwmon3/temp1_input"
+        path = "/sys/class/hwmon/hwmon4/temp1_input"
 }
 
 disk "/" {
@@ -26,19 +31,19 @@ disk "/" {
 }
 
 battery 0 {
-    format = "%status %percentage %remaining %emptytime"
+    format = "%status %percentage"
     format_down = ""
-    status_chr = "⚡ CHR"
-    status_bat = "🔋 BAT"
-    status_unk = "? UNK"
-    status_full = "☻ FULL"
-    status_idle = "☻ IDLE"
+    status_chr = "chr:"
+    status_bat = "bat:"
+    status_unk = "unk:"
+    status_full = "full:"
+    status_idle = "idle:"
     path = "/sys/class/power_supply/BAT%d/uevent"
     low_threshold = 10
 }
 
 memory {
-        format = "mem: %used"
+        format = "mem: %percentage_used"
         threshold_degraded = "10%"
         format_degraded = "MEMORY: %free"
 }
