@@ -235,7 +235,7 @@ bindsym $mod+r mode "resize"
 for_window [class="calcurse-float"] floating enable, resize set 80 ppt 80 ppt, move position center
 
 # languages
-exec_always --no-startup-id "setxkbmap -option && setxkbmap -model pc104 -layout us,br -variant ,abnt2 -option grp:alt_space_toggle"
+bindsym alt+space exec "setxkbmap -layout us,br -option grp:toggle"
 
 # Disable window titlebars entirely
 for_window [class="^.*"] border pixel 2
@@ -254,6 +254,10 @@ exec_always feh --bg-scale ~/.config/i3/wallpaper.png
 
 # rofi power menu
 bindsym $mod+Shift+p exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu
+
+# doom 
+bindsym $mod+Shift+Return exec emacsclient -c -a 'emacs'
+exec_always --no-startup-id /usr/bin/emacs --daemon
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a

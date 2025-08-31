@@ -1,6 +1,8 @@
 export KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty"
+export PATH="$HOME/.config/emacs/bin:$PATH"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias emacs="emacsclient -c -a 'emacs'"
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
