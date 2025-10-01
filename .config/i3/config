@@ -235,7 +235,8 @@ bindsym $mod+r mode "resize"
 for_window [class="calcurse-float"] floating enable, resize set 80 ppt 80 ppt, move position center
 
 # languages
-bindsym alt+space exec "setxkbmap -layout us,br -option grp:toggle"
+exec --no-startup-id setxkbmap -layout "us,br" -option "grp:alt_shift_toggle"
+# bindsym alt+space exec "setxkbmap -layout us,br -option grp:toggle"
 
 # Disable window titlebars entirely
 for_window [class="^.*"] border pixel 2
@@ -247,7 +248,10 @@ gaps inner 4
 gaps outer 1
 
 # screens config
-exec --no-startup-id xrandr --output DP-4 --primary --right-of DP-0
+exec_always --no-startup-id xrandr \
+  --output DP-2 --primary --mode 1680x1050 --pos 0x0 --rotate normal \
+  --output HDMI-0 --mode 800x600 --pos 1680x0 --rotate normal
+workspace 1 outputi DP-2
 
 # wallpaper
 exec_always feh --bg-scale ~/.config/i3/wallpaper.png
