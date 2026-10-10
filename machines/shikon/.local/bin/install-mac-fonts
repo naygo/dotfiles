@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+work_dir=$(mktemp -d)
+trap 'rm -rf -- "$work_dir"' EXIT
+font_dir="$HOME/.local/share/fonts/apple-sf"
+download_dir="$HOME/.cache/mac-fonts"
+mkdir -p "$download_dir"
+
+if command -v 7z >/dev/null; then
+    archive_tool=$(command -v 7z)
+elif command -v 7zz >/dev/null; then
+    archive_tool=$(command -v 7zz)
+else
+    echo 'Obtendo extrator local, sem sudo...'
+    (cd "$work_dir" && apt-get download 7zip)
+    deb_files=("$work_dir"/*.deb)
+    dpkg-deb -x "${deb_files[0]}" "$work_dir/extractor"
+    # usr/bin/7z is a wrapper with an absolute /usr/lib path.
+    # Run the actual extracted executable, beside its codecs.
+    archive_tool="$work_dir/extractor/usr/lib/7zip/7z"
+    if [[ ! -x "$archive_tool" ]]; then
+        archive_tool="$work_dir/extractor/usr/bin/7zz"
+    fi
+fi
+"$archive_tool" i >/dev/null
+
+for family in SF-Pro SF-Mono; do
+    if [[ ! -s "$download_dir/$family.dmg" ]]; then
+        echo "Baixando $family da Apple..."
+        curl --fail --location --retry 2 --connect-timeout 20 \
+            "https://devimages-cdn.apple.com/design/resources/download/$family.dmg" \
+            --output "$download_dir/$family.dmg.part"
+        mv -- "$download_dir/$family.dmg.part" "$download_dir/$family.dmg"
+    fi
+    "$archive_tool" x -y "-o$work_dir/$family" "$download_dir/$family.dmg" >/dev/null
+    # Some extractor versions expose the filesystem image as a second layer.
+    while IFS= read -r -d '' image; do
+        "$archive_tool" x -y "-o$image.files" "$image" >/dev/null
+    done < <(find "$work_dir/$family" -type f -name '*.hfs' -print0)
+    while IFS= read -r -d '' package; do
+        "$archive_tool" x -y "-o$package.files" "$package" >/dev/null
+    done < <(find "$work_dir/$family" -type f -name '*.pkg' -print0)
+    while IFS= read -r -d '' payload; do
+        mkdir -p "$payload.files"
+        "$archive_tool" x -y "-o$payload.files" "$payload" >/dev/null
+        # Gzip may name the expanded CPIO stream Payload~ rather than *.cpio.
+        while IFS= read -r -d '' cpio_file; do
+            "$archive_tool" x -y "-o$cpio_file.contents" "$cpio_file" >/dev/null
+        done < <(find "$payload.files" -maxdepth 1 -type f ! -iname '*.otf' ! -iname '*.ttf' -print0)
+    done < <(find "$work_dir/$family" -type f -name Payload -print0)
+done
+
+mkdir -p "$font_dir"
+find "$work_dir/SF-Pro" "$work_dir/SF-Mono" -type f \
+    \( -iname '*.otf' -o -iname '*.ttf' \) -exec cp -t "$font_dir" -- {} +
+fc-cache -f "$font_dir"
+for family in 'SF Pro Text' 'SF Mono'; do
+    if [[ "$(fc-match -f '%{family}' "$family")" != *"$family"* ]]; then
+        echo "Fonte $family não encontrada após a extração; configurações preservadas." >&2
+        exit 1
+    fi
+done
+
+python3 - <<'PY'
+from pathlib import Path
+from datetime import datetime
+import shutil
+import configparser
+
+home = Path.home()
+backup = home / '.config/theme-backups' / ('before-mac-fonts-' + datetime.now().strftime('%Y%m%d-%H%M%S'))
+backup.mkdir(parents=True)
+
+def save(relative, content):
+    path = home / relative
+    if path.exists():
+        destination = backup / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, destination)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
+
+for relative in ('.config/i3/config', '.config/polybar/config.ini',
+                 '.config/dunst/dunstrc', '.config/rofi/config.rasi',
+                 '.config/rofi/gruvbox-glass.rasi'):
+    path = home / relative
+    save(relative, path.read_text().replace('JetBrains Mono', 'SF Pro Text'))
+
+relative = '.config/kitty/kitty.conf'
+content = (home / relative).read_text()
+content = content.replace('JetBrains Mono', 'SF Mono')
+save(relative, content)
+
+for relative in ('.config/gtk-3.0/settings.ini', '.config/gtk-4.0/settings.ini'):
+    path = home / relative
+    settings = configparser.ConfigParser(interpolation=None)
+    settings.optionxform = str
+    if path.exists():
+        settings.read(path)
+    if not settings.has_section('Settings'):
+        settings.add_section('Settings')
+    settings['Settings']['gtk-font-name'] = 'SF Pro Text 11'
+    import io
+    output = io.StringIO()
+    settings.write(output, space_around_delimiters=False)
+    save(relative, output.getvalue())
+
+save('.config/fontconfig/conf.d/60-apple-fonts.conf', '''<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+  <alias><family>sans-serif</family><prefer><family>SF Pro Text</family></prefer></alias>
+  <alias><family>monospace</family><prefer><family>SF Mono</family></prefer></alias>
+</fontconfig>
+''')
+print(f'Configurações salvas. Backup: {backup}')
+PY
+
+fc-cache -f
+if command -v gsettings >/dev/null; then
+    gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11' || true
+    gsettings set org.gnome.desktop.interface document-font-name 'SF Pro Text 11' || true
+    gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 12' || true
+fi
+i3-msg reload || true
+"$HOME/.config/polybar/launch.sh" >/tmp/polybar-mac-fonts.log 2>&1 &
+pkill -x dunst || true
+echo 'SF Pro Text nas interfaces e SF Mono no Kitty. Reabra o terminal e os aplicativos.'

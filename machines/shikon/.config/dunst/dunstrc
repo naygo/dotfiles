@@ -8,7 +8,7 @@
     height = (0, 300)
     notification_limit = 5
 
-    font = JetBrains Mono 10
+    font = SF Pro Text 10
     markup = full
     format = "<span foreground='#a89984' size='small'>%a</span>\n<b>%s</b>\n%b"
     alignment = left

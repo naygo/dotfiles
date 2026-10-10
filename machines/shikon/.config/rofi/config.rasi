@@ -2,7 +2,7 @@ configuration {
     modi: "drun";
     show-icons: true;
     icon-theme: "Adwaita";
-    font: "JetBrains Mono 12";
+    font: "SF Pro Text 12";
     drun-display-format: "{name}";
     display-drun: "Aplicativos";
 }
