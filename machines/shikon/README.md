@@ -10,6 +10,8 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Launcher Rofi minimalista e centralizado, com busca simples, ícones compactos e seleção discreta.
 - Painel de volume e terminais abrem flutuando e centralizados.
 - Workspace ativo com círculo amarelo e número na fonte original.
+- Grupos de abas com cantos superiores na faixa e inferiores no conteúdo; junção reta, sem sombra entre as peças.
+- Abas ativas douradas, títulos com mais espaço e melhor contraste.
 - Fontes: JetBrains Mono e Symbols Nerd Font/Mono.
 - Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
 
@@ -34,6 +36,7 @@ dunstctl reload
 
 Os scripts dos popovers precisam de Python 3, PyGObject/GTK 3, sensors,
 nvidia-smi (para GPU NVIDIA), upower e das ferramentas pactl/df.
+O ajuste automático dos grupos usa xprop (x11-utils).
 Ações da barra usam CopyQ, Flameshot, xclip, dunstctl e pavucontrol.
 O launcher do i3 usa Rofi; a sessão também inicia feh, nm-applet e blueman-applet.
 

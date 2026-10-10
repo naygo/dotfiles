@@ -2,6 +2,7 @@
 set -euo pipefail
 i3 -C -c "$HOME/.config/i3/config"
 i3-msg reload
+python3 "$HOME/.config/i3/sync-grouped-windows.py" >/tmp/i3-groups.log 2>&1 &
 pkill -u "$(id -u)" -x picom || true
 for ((attempt = 0; attempt < 50; attempt++)); do
     if ! pgrep -u "$(id -u)" -x picom >/dev/null; then break; fi

@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Limpeza única do painel antigo, que não tinha fechamento confiável.
+if [[ -f "$HOME/.config/polybar/close-old-vitals-once" ]]; then
+    pkill -u "$(id -u)" -f '/home/naygo/\.config/polybar/scripts/vitals_popover\.py([[:space:]]|$)' || true
+    rm -f -- "$HOME/.config/polybar/close-old-vitals-once"
+fi
+
 python3 "$HOME/.config/i3/sync-bar-gaps.py" --reset
 
 pkill -u "$(id -u)" -x polybar || true
