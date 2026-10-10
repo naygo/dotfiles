@@ -9,7 +9,7 @@ set $term kitty
 set $menu rofi -show drun -show-icons
 
 # Fonte
-font pango:JetBrains Mono 10
+font pango:JetBrains Mono 11
 
 # ─── Inicialização ───────────────────────────────────────────────────────────
 
@@ -18,6 +18,7 @@ exec_always --no-startup-id ~/.screenlayout/monitors.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 exec --no-startup-id picom --daemon
+exec_always --no-startup-id python3 ~/.config/i3/sync-grouped-windows.py
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
@@ -156,6 +157,9 @@ bindsym $mod+r mode "resize"
 # ─── Aparência Gruvbox Dark ──────────────────────────────────────────────────
 
 for_window [class="^.*"] border pixel 1
+# Dar respiro aos títulos nas abas e no layout empilhado.
+for_window [class="^.*"] title_format "  %title  "
+for_window [class="^.*"] title_window_icon padding 8px
 
 # ─── Popovers flutuantes (Clipboard) ────────────────────────────────────────
 
@@ -181,10 +185,10 @@ workspace $ws5 gaps top 38
 workspace $ws6 gaps top 38
 
 # classe                borda    fundo    texto    indicador janela ativa
-client.focused          #d79921  #282828  #ebdbb2  #d79921   #d79921
-client.focused_inactive #504945  #282828  #a89984  #504945   #504945
-client.unfocused        #3c3836  #282828  #7c6f64  #3c3836   #3c3836
-client.urgent           #cc241d  #282828  #ebdbb2  #cc241d   #cc241d
+client.focused          #d79921  #d79921  #282828  #d79921   #d79921
+client.focused_inactive #504945  #504945  #ebdbb2  #504945   #504945
+client.unfocused        #3c3836  #3c3836  #a89984  #3c3836   #3c3836
+client.urgent           #cc241d  #cc241d  #ebdbb2  #cc241d   #cc241d
 
 bar {
     mode invisible
