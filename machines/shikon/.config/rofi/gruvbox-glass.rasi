@@ -7,7 +7,7 @@
     accent: #fabd2f;
     background-color: transparent;
     text-color: @fg;
-    font: "JetBrains Mono 11";
+    font: "SF Pro Text 11";
 }
 window {
     width: 480px;
