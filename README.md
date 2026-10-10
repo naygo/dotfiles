@@ -16,3 +16,9 @@ before using these configs, make sure you have the following installed:
 some stuff need to be downloaded separately:
 
 - polybar pulseaudio control: [https://github.com/marioortizmanero/polybar-pulseaudio-control](https://github.com/marioortizmanero/polybar-pulseaudio-control)
+
+## Configurações por computador
+
+[Configurações por computador](machines/README.md).
+
+O desktop `shikon` está em `machines/shikon/`.
