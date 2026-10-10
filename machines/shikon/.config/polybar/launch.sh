@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 "$HOME/.config/i3/sync-bar-gaps.py"
+python3 "$HOME/.config/i3/sync-bar-gaps.py" --reset
 
 pkill -u "$(id -u)" -x polybar || true
 for ((attempt = 0; attempt < 50; attempt++)); do
@@ -15,3 +15,5 @@ fi
 for bar in left workspaces right; do
     polybar "$bar" --config="$HOME/.config/polybar/config.ini" &
 done
+# Ajustar também os workspaces criados enquanto a barra estiver escondida.
+python3 "$HOME/.config/i3/sync-bar-gaps.py" --watch &

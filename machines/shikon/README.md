@@ -9,8 +9,9 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Notificações Gruvbox com ícones compactos, cantos de 16 px e glass do Picom.
 - Launcher Rofi minimalista e centralizado, com busca simples, ícones compactos e seleção discreta.
 - Painel de volume e terminais abrem flutuando e centralizados.
+- Workspace ativo com círculo amarelo e número na fonte original.
 - Fontes: JetBrains Mono e Symbols Nerd Font/Mono.
-- Super+Shift+B: esconder/mostrar as barras; Super+Shift+R: recarregar o i3.
+- Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
 
 ## Arquivos
 
