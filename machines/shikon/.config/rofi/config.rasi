@@ -1,0 +1,9 @@
+configuration {
+    modi: "drun";
+    show-icons: true;
+    icon-theme: "Adwaita";
+    font: "JetBrains Mono 12";
+    drun-display-format: "{name}";
+    display-drun: "Aplicativos";
+}
+@theme "gruvbox-glass"

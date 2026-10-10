@@ -161,6 +161,12 @@ for_window [class="^.*"] border pixel 1
 
 for_window [class="copyq"] floating enable, resize set 640 480, move position center
 
+# Painel de volume flutuante e centralizado no monitor atual.
+for_window [class="(?i)^pavucontrol$"] floating enable, move position center
+
+# Terminais flutuantes e centralizados no monitor atual.
+for_window [class="(?i)^(kitty|xterm|gnome-terminal|org\.gnome\.Terminal)$"] floating enable, move position center
+
 gaps inner 8
 gaps outer 2
 smart_gaps off
