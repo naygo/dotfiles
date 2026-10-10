@@ -1,0 +1,76 @@
+/* Launcher mínimo Gruvbox; glass aplicado pelo Picom. */
+* {
+    bg: #282828;
+    panel: #3c3836;
+    fg: #ebdbb2;
+    muted: #a89984;
+    accent: #fabd2f;
+    background-color: transparent;
+    text-color: @fg;
+    font: "JetBrains Mono 11";
+}
+window {
+    width: 480px;
+    location: center;
+    anchor: center;
+    fullscreen: false;
+    background-color: @bg;
+    transparency: "real";
+    border: 0px;
+    border-radius: 16px;
+    padding: 18px;
+}
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 12px;
+}
+inputbar {
+    children: [ entry ];
+    padding: 6px 10px 12px;
+    border: 0px 0px 1px;
+    border-color: @panel;
+}
+entry {
+    placeholder: "Buscar…";
+    placeholder-color: @muted;
+    expand: true;
+}
+listview {
+    columns: 1;
+    lines: 6;
+    fixed-height: true;
+    spacing: 2px;
+    scrollbar: false;
+    cycle: true;
+}
+element {
+    children: [ element-icon, element-text ];
+    padding: 8px 10px;
+    spacing: 10px;
+    border: 0px;
+    border-radius: 6px;
+    background-color: transparent;
+    text-color: @fg;
+}
+element selected.normal, element selected.active {
+    background-color: @panel;
+    text-color: @accent;
+}
+element normal.urgent, element alternate.urgent {
+    text-color: #fb4934;
+}
+element selected.urgent {
+    background-color: @panel;
+    text-color: #fb4934;
+}
+element-icon {
+    size: 20px;
+    background-color: inherit;
+    text-color: inherit;
+}
+element-text {
+    vertical-align: 0.5;
+    background-color: inherit;
+    text-color: inherit;
+    highlight: bold;
+}
