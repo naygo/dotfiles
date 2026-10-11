@@ -12,14 +12,15 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Workspaces com números centralizados em espaços iguais, ativo amarelo e inativos com contraste maior.
 - Grupos de abas com cantos superiores na faixa e inferiores no conteúdo; junção reta, sem sombra entre as peças.
 - Abas ativas douradas, títulos com mais espaço e melhor contraste.
-- Fontes: SF Pro Text nas interfaces, SF Mono no Kitty e Symbols Nerd Font/Mono nos ícones.
+- Fontes: SF Pro Text nas interfaces, SF Mono tamanho 10 no Kitty e no GNOME Terminal; Symbols Nerd Font/Mono nos ícones.
+- VS Code com SF Pro Text no editor e no terminal integrado.
 - Dia e horário em amarelo e semibold; pílulas sem sombras retangulares e com extremidades alinhadas.
 - Ícones das janelas reduzidos dentro de uma área transparente, preservando fonte e padding das abas.
 - Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
 
 ## Arquivos
 
-`.config/` contém i3, Polybar, Picom (incluindo shaders), Kitty, Dunst, Rofi, GTK e Fontconfig.
+`.config/` contém i3, Polybar, Picom (incluindo shaders), Kitty, GNOME Terminal, VS Code, Dunst, Rofi, GTK e Fontconfig.
 `.local/bin/install-mac-fonts` baixa e instala as fontes a partir dos arquivos oficiais da Apple; os arquivos das fontes não são incluídos no repositório.
 `.screenlayout/monitors.sh` define os monitores; `.Xresources` configura recursos do X11.
 As configurações de monitores, interface de rede e caminhos são específicas deste PC.
@@ -33,6 +34,8 @@ cp -a .config/. "$HOME/.config/"
 mkdir -p "$HOME/.local/bin"
 cp -a .local/bin/install-mac-fonts "$HOME/.local/bin/"
 ~/.local/bin/install-mac-fonts
+gsettings set org.gnome.desktop.interface monospace-font-name "SF Mono 10"
+dconf load /org/gnome/terminal/ < .config/gnome-terminal/settings.dconf
 mkdir -p "$HOME/.screenlayout"
 cp -a .screenlayout/monitors.sh "$HOME/.screenlayout/"
 cp -a .Xresources "$HOME/.Xresources"

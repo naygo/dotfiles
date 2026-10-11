@@ -1,0 +1,86 @@
+{
+  "editor.inlineSuggest.enabled": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.tabSize": 2,
+  "editor.fontFamily": "SF Pro Text",
+  "insertDateString.format": "<YYYY-MM-DD (DDDD) [hh:mm:ss]>",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.lineHeight": 1.6,
+  "editor.rulers": [
+    80,
+    100,
+    130
+  ],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontSize": 16,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "git.suggestSmartCommit": false,
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "eslint.codeActionsOnSave.rules": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.activityBar.location": "top",
+  "window.customTitleBarVisibility": "auto",
+  "editor.minimap.autohide": "mouseover",
+  "terminal.integrated.fontFamily": "SF Pro Text",
+  "editor.cursorStyle": "underline",
+  "editor.cursorBlinking": "smooth",
+  "editor.autoClosingBrackets": "never",
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.colorCustomizations": {
+    "terminal.background": "#00000000"
+  },
+  "workbench.settings.applyToAllProfiles": [
+    "workbench.colorCustomizations"
+  ],
+  "glassit.alpha": 220,
+  "editor.lineNumbers": "relative",
+  "update.showReleaseNotes": false,
+  "breadcrumbs.enabled": false,
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.tree.enableStickyScroll": false,
+  "terminal.integrated.ignoreProcessNames": [
+    "bash"
+  ],
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "path": "/bin/bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "bash",
+  "[handlebars]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "chat.viewSessions.orientation": "stacked",
+  "claudeCode.preferredLocation": "sidebar"
+}
