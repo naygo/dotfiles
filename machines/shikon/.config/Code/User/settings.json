@@ -52,7 +52,7 @@
   "workbench.activityBar.location": "top",
   "window.customTitleBarVisibility": "auto",
   "editor.minimap.autohide": "mouseover",
-  "terminal.integrated.fontFamily": "SF Pro Text",
+  "terminal.integrated.fontFamily": "SF Mono",
   "editor.cursorStyle": "underline",
   "editor.cursorBlinking": "smooth",
   "editor.autoClosingBrackets": "never",

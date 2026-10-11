@@ -13,7 +13,7 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Grupos de abas com cantos superiores na faixa e inferiores no conteúdo; junção reta, sem sombra entre as peças.
 - Abas ativas douradas, títulos com mais espaço e melhor contraste.
 - Fontes: SF Pro Text nas interfaces, SF Mono tamanho 10 no Kitty e no GNOME Terminal; Symbols Nerd Font/Mono nos ícones.
-- VS Code com SF Pro Text no editor e no terminal integrado.
+- VS Code com SF Pro Text no editor e SF Mono no terminal integrado, para preservar o espaçamento das células.
 - Dia e horário em amarelo e semibold; pílulas sem sombras retangulares e com extremidades alinhadas.
 - Ícones das janelas reduzidos dentro de uma área transparente, preservando fonte e padding das abas.
 - Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
