@@ -1,0 +1,124 @@
+{
+  "visible": [
+    {
+      "id": 94597090373088,
+      "num": 1,
+      "focused": false,
+      "visible": false,
+      "output": "HDMI-0",
+      "name": "1"
+    },
+    {
+      "id": 94597090379328,
+      "num": 2,
+      "focused": false,
+      "visible": false,
+      "output": "HDMI-0",
+      "name": "2"
+    },
+    {
+      "id": 94597090392240,
+      "num": 3,
+      "focused": false,
+      "visible": false,
+      "output": "HDMI-0",
+      "name": "3"
+    },
+    {
+      "id": 94597090395504,
+      "num": 4,
+      "focused": false,
+      "visible": false,
+      "output": "HDMI-0",
+      "name": "4"
+    },
+    {
+      "id": 94597090468688,
+      "num": 5,
+      "focused": false,
+      "visible": false,
+      "output": "HDMI-0",
+      "name": "5"
+    },
+    {
+      "id": 94597090406544,
+      "num": 6,
+      "focused": true,
+      "visible": true,
+      "output": "HDMI-0",
+      "name": "6"
+    },
+    {
+      "id": 94597090428864,
+      "num": 7,
+      "focused": false,
+      "visible": true,
+      "output": "DP-0",
+      "name": "7"
+    }
+  ],
+  "tree": [
+    {
+      "id": 94597090360608,
+      "num": -1,
+      "focused": false,
+      "windows": []
+    },
+    {
+      "id": 94597090373088,
+      "num": 1,
+      "focused": false,
+      "windows": [
+        37748763
+      ]
+    },
+    {
+      "id": 94597090379328,
+      "num": 2,
+      "focused": false,
+      "windows": [
+        37749962
+      ]
+    },
+    {
+      "id": 94597090392240,
+      "num": 3,
+      "focused": false,
+      "windows": [
+        65011728
+      ]
+    },
+    {
+      "id": 94597090395504,
+      "num": 4,
+      "focused": false,
+      "windows": [
+        77594635
+      ]
+    },
+    {
+      "id": 94597090468688,
+      "num": 5,
+      "focused": false,
+      "windows": [
+        94371844
+      ]
+    },
+    {
+      "id": 94597090406544,
+      "num": 6,
+      "focused": true,
+      "windows": []
+    },
+    {
+      "id": 94597090428864,
+      "num": 7,
+      "focused": false,
+      "windows": [
+        37749065,
+        46137348,
+        62914564
+      ]
+    }
+  ]
+}

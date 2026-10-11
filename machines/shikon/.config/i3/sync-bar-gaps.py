@@ -15,24 +15,13 @@ def runtime_dir():
 
 
 def build_command(workspaces, hidden=False):
-    affected = [w for w in workspaces if w["output"] == "HDMI-0"]
-    if not affected:
-        return ""
-    commands = []
-    def select(name):
-        return "workspace --no-auto-back-and-forth " + json.dumps(name)
-    for workspace in affected:
-        # Retain the usual 2 px outer gap when the bar is hidden.
-        gap = 2 if hidden else 38
-        commands.extend([select(workspace["name"]), f"gaps top current set {gap}"])
-    # Restore which workspace was visible on the main monitor, then input focus.
-    for workspace in affected:
-        if workspace.get("visible"):
-            commands.append(select(workspace["name"]))
+    # Visiting other workspaces destroys an empty focused workspace. Restoring
+    # it then emits "init", causing the listener to repeat forever. Only change
+    # the current workspace; the listener updates the others as they gain focus.
     for workspace in workspaces:
-        if workspace.get("focused"):
-            commands.append(select(workspace["name"]))
-    return "; ".join(commands)
+        if workspace.get("focused") and workspace["output"] == "HDMI-0":
+            return f"gaps top current set {2 if hidden else 38}"
+    return ""
 
 
 def apply_gaps(hidden):
@@ -77,9 +66,9 @@ def watch():
                 synchronize()
                 for line in subscription.stdout:
                     event = json.loads(line)
-                    # Selecting workspaces to update gaps emits focus events;
-                    # ignore those so our own commands cannot trigger a loop.
-                    if isinstance(event, dict) and event.get("change") in {"init", "move", "unspecified"}:
+                    # Gap commands do not change focus or create workspaces.
+                    # Apply the current bar state when the user enters a workspace.
+                    if isinstance(event, dict) and event.get("change") in {"init", "focus", "move", "unspecified"}:
                         synchronize()
             finally:
                 if subscription.poll() is None:
