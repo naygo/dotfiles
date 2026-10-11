@@ -1,0 +1,16 @@
+[legacy/profiles:]
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
+
+[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='#282828'
+bold-is-bright=true
+cursor-background-color='#d79921'
+cursor-colors-set=true
+cursor-foreground-color='#282828'
+cursor-shape='block'
+font='SF Mono 10'
+foreground-color='#ebdbb2'
+palette=['#282828', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#a89984', '#928374', '#fb4934', '#b8bb26', '#fabd2f', '#83a598', '#d3869b', '#8ec07c', '#ebdbb2']
+use-system-font=false
+use-theme-colors=false
