@@ -14,7 +14,7 @@
     "editor.formatOnType": true
   },
   "editor.tabSize": 2,
-  "editor.fontFamily": "SF Pro Text",
+  "editor.fontFamily": "Menlo, 'SF Mono', monospace",
   "insertDateString.format": "<YYYY-MM-DD (DDDD) [hh:mm:ss]>",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
