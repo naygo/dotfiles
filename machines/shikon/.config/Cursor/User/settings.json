@@ -1,0 +1,7 @@
+{
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.iconTheme": "vscode-icons",
+    "window.autoDetectColorScheme": false,
+    "editor.fontFamily": "Menlo, 'SF Mono', monospace",
+    "terminal.integrated.fontFamily": "SF Mono"
+}

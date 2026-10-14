@@ -13,15 +13,16 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Grupos de abas com cantos superiores na faixa e inferiores no conteúdo; junção reta, sem sombra entre as peças.
 - Abas ativas douradas, títulos com mais espaço e melhor contraste.
 - Fontes: SF Pro Text nas interfaces, SF Mono tamanho 10 no Kitty e no GNOME Terminal; Symbols Nerd Font/Mono nos ícones.
-- VS Code com SF Pro Text no editor e SF Mono no terminal integrado, para preservar o espaçamento das células.
+- VS Code e Cursor com Menlo no editor (SF Mono como alternativa) e SF Mono no terminal integrado.
 - Dia e horário em amarelo e semibold; pílulas sem sombras retangulares e com extremidades alinhadas.
 - Ícones das janelas reduzidos dentro de uma área transparente, preservando fonte e padding das abas.
 - Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
 
 ## Arquivos
 
-`.config/` contém i3, Polybar, Picom (incluindo shaders), Kitty, GNOME Terminal, VS Code, Dunst, Rofi, GTK e Fontconfig.
+`.config/` contém i3, Polybar, Picom (incluindo shaders), Kitty, GNOME Terminal, VS Code, Cursor, Dunst, Rofi, GTK e Fontconfig.
 `.local/bin/install-mac-fonts` baixa e instala as fontes a partir dos arquivos oficiais da Apple; os arquivos das fontes não são incluídos no repositório.
+A Menlo é instalada separadamente: copie `Menlo-Regular.ttf` para `~/.local/share/fonts/menlo/` (crie a pasta se necessário) e execute `fc-cache -f`. O arquivo da fonte não é incluído no repositório. Sem Menlo, os editores usam SF Mono.
 `.screenlayout/monitors.sh` define os monitores; `.Xresources` configura recursos do X11.
 As configurações de monitores, interface de rede e caminhos são específicas deste PC.
 
