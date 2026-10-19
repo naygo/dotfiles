@@ -6,4 +6,4 @@ configuration {
     drun-display-format: "{name}";
     display-drun: "Aplicativos";
 }
-@theme "gruvbox-glass"
+@theme "macos-glass"

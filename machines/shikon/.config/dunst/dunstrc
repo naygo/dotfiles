@@ -1,4 +1,4 @@
-# Gruvbox Dark — transparência e blur aplicados pelo Picom.
+# Graphite Dark — transparência e blur aplicados pelo Picom.
 [global]
     monitor = 0
     follow = none
@@ -10,7 +10,7 @@
 
     font = SF Pro Text 10
     markup = full
-    format = "<span foreground='#a89984' size='small'>%a</span>\n<b>%s</b>\n%b"
+    format = "<span foreground='#b5b7c0' size='small'>%a</span>\n<b>%s</b>\n%b"
     alignment = left
     vertical_alignment = center
     line_height = 3
@@ -26,7 +26,7 @@
     icon_corner_radius = 6
     corner_radius = 16
     frame_width = 1
-    frame_color = "#504945"
+    frame_color = "#484a50"
     gap_size = 8
     separator_height = 0
     transparency = 0
@@ -48,22 +48,22 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#282828"
-    foreground = "#a89984"
-    frame_color = "#3c3836"
-    highlight = "#83a598"
+    background = "#202124"
+    foreground = "#b5b7c0"
+    frame_color = "#303136"
+    highlight = "#64b5ff"
     timeout = 10
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    frame_color = "#504945"
-    highlight = "#d79921"
+    background = "#202124"
+    foreground = "#f5f5f7"
+    frame_color = "#484a50"
+    highlight = "#0a84ff"
     timeout = 10
 
 [urgency_critical]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    frame_color = "#fb4934"
-    highlight = "#fb4934"
+    background = "#202124"
+    foreground = "#f5f5f7"
+    frame_color = "#ff6961"
+    highlight = "#ff6961"
     timeout = 0

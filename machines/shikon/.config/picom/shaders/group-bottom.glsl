@@ -7,10 +7,10 @@ vec4 default_post_processing(vec4 color);
 
 bool is_i3_border(vec3 color) {
     const float tolerance = 3.0 / 255.0;
-    return distance(color, vec3(215.0, 153.0, 33.0) / 255.0) < tolerance
-        || distance(color, vec3(80.0, 73.0, 69.0) / 255.0) < tolerance
-        || distance(color, vec3(60.0, 56.0, 54.0) / 255.0) < tolerance
-        || distance(color, vec3(204.0, 36.0, 29.0) / 255.0) < tolerance;
+    return distance(color, vec3(142.0, 144.0, 153.0) / 255.0) < tolerance
+        || distance(color, vec3(72.0, 74.0, 80.0) / 255.0) < tolerance
+        || distance(color, vec3(48.0, 49.0, 54.0) / 255.0) < tolerance
+        || distance(color, vec3(255.0, 69.0, 58.0) / 255.0) < tolerance;
 }
 
 vec4 window_shader() {
