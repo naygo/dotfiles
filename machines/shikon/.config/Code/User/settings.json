@@ -56,7 +56,6 @@
   "editor.cursorStyle": "underline",
   "editor.cursorBlinking": "smooth",
   "editor.autoClosingBrackets": "never",
-  "workbench.colorTheme": "Gruvbox Dark Hard",
   "workbench.colorCustomizations": {
     "terminal.background": "#00000000"
   },

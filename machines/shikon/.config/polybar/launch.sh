@@ -29,7 +29,7 @@ if pgrep -u "$(id -u)" -x polybar >/dev/null; then
     echo "A Polybar anterior não encerrou; tente novamente." >&2
     exit 1
 fi
-for bar in left workspaces right; do
+for bar in main; do
     polybar "$bar" --config="$HOME/.config/polybar/config.ini" &
 done
 # Ajustar também os workspaces criados enquanto a barra estiver escondida.
