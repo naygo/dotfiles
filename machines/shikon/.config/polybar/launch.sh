@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Limpeza única do painel antigo, que não tinha fechamento confiável.
 if [[ -f "$HOME/.config/polybar/close-old-vitals-once" ]]; then
-    pkill -u "$(id -u)" -f '/home/naygo/\.config/polybar/scripts/vitals_popover\.py([[:space:]]|$)' || true
+    pkill -u "$(id -u)" -f "$HOME/\.config/polybar/scripts/vitals_popover\.py([[:space:]]|$)" || true
     rm -f -- "$HOME/.config/polybar/close-old-vitals-once"
 fi
 
