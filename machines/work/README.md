@@ -13,6 +13,8 @@ em vez de pacotes extras.
   em `~/.local/share/rofi-gnome/`, lida só pelo Rofi, e são geradas automaticamente.
 - Volume e rede da barra abrem os painéis do Configurações (no lugar de pavucontrol e nm-applet);
   teclas de volume usam `wpctl` (PipeWire).
+- Bluetooth pelo painel do Configurações; o i3 inicia o `gsd-rfkill`, sem o qual o painel
+  não encontra o adaptador e pede um dongle.
 - Teclas de brilho: `i3/brightness.sh`, que usa o helper do mutter via `pkexec` (o polkit libera a
   sessão ativa sem senha) e mostra o nível no Dunst. O `gsd-power` desta versão só controla o
   brilho do teclado.
