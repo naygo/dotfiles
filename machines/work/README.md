@@ -7,7 +7,7 @@ em vez de pacotes extras.
 - Monitor único: eDP-1, 1366×768; interface de rede `wlp0s20f3`.
 - Mesmo tema macOS Graphite do shikon na Polybar, Rofi, Dunst, Kitty e i3.
 - Glass do Picom (90% de opacidade com blur) só nos aplicativos da lista em `picom.conf`:
-  kitty e VS Code; os demais ficam opacos.
+  kitty, VS Code, Rofi e Dunst; os demais ficam opacos.
 - Fontes: Ubuntu Sans nas interfaces e Ubuntu Sans Mono no Kitty (SF Pro/SF Mono não podem
   ser instaladas aqui); Symbols Nerd Font nos ícones.
 - Rofi (`$mod+d` e logo da barra) via `rofi/launcher.sh`: roda com `XDG_CURRENT_DESKTOP=i3:GNOME`
