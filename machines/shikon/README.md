@@ -9,13 +9,14 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 - Notificações Gruvbox com ícones compactos, cantos de 16 px e glass do Picom.
 - Launcher Rofi minimalista e centralizado, com busca simples, ícones compactos e seleção discreta.
 - Painel de volume e terminais abrem flutuando e centralizados.
-- Workspaces com números centralizados em espaços iguais, ativo amarelo e inativos com contraste maior.
+- Polybar no mesmo visual do [work](../work/README.md): workspaces só com o número (o focado em destaque, os demais apagados), título da janela apagado e relógio claro, com espaçamentos em px.
 - Grupos de abas com cantos superiores na faixa e inferiores no conteúdo; junção reta, sem sombra entre as peças.
 - Abas ativas douradas, títulos com mais espaço e melhor contraste.
 - Fontes: SF Pro Text nas interfaces, SF Mono tamanho 10 no Kitty e no GNOME Terminal; Symbols Nerd Font/Mono nos ícones.
 - VS Code e Cursor com Menlo no editor (SF Mono como alternativa) e SF Mono no terminal integrado.
-- Dia e horário em amarelo e semibold; pílulas sem sombras retangulares e com extremidades alinhadas.
+- Pílulas sem sombras retangulares e com extremidades alinhadas.
 - Ícones das janelas reduzidos dentro de uma área transparente, preservando fonte e padding das abas.
+- Super+Shift+W: escolher o papel de parede entre os da pasta global [`wallpapers/`](../../wallpapers/README.md) (o script `wallpaper` usa a mesma imagem nos dois monitores até o próximo reinício do i3, que reaplica os momo por monitor).
 - Super+Shift+B: esconder/mostrar as barras e liberar/restaurar o espaço das janelas; Super+Shift+R: recarregar o i3.
 
 ## Arquivos
@@ -51,6 +52,7 @@ nvidia-smi (para GPU NVIDIA), upower e das ferramentas pactl/df.
 O ajuste automático dos grupos usa xprop (x11-utils).
 O ajuste dos ícones usa `/usr/bin/python3`, PyGObject/GdkPixbuf e libX11.
 O instalador das fontes usa curl, fontconfig e 7zip (obtido localmente pelo apt caso não esteja instalado).
+Os símbolos ✳ ◑ dos títulos usam a fonte Noto Sans Symbols2 (`sudo apt install fonts-noto-core`).
 Ações da barra usam CopyQ, Flameshot, xclip, dunstctl e pavucontrol.
 O launcher do i3 usa Rofi; a sessão também inicia feh, nm-applet e blueman-applet.
 

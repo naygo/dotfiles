@@ -33,6 +33,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e restart
 bindsym $mod+t exec thunar
+
+# Papel de parede: escolhe entre os de ~/dotfiles/wallpapers
+bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 bindsym $mod+Shift+x exec ~/.config/i3/logout.sh
 bindsym $mod+Shift+v exec --no-startup-id copyq toggle
 
