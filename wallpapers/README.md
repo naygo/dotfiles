@@ -1,4 +1,4 @@
-# Papéis de parede
+# wallpapers
 
 Imagens compartilhadas entre os computadores. Para escolher uma, use `$mod+Shift+w`
 ou o comando [`wallpaper`](../.local/bin/wallpaper):
