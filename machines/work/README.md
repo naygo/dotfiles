@@ -20,6 +20,8 @@ em vez de pacotes extras.
   brilho do teclado.
 - Screenshot: PrtSc ou botão da barra, Flameshot copiando para a área de transferência.
 - `$mod+t` abre o Nautilus.
+- Papel de parede: recorte quadrado de 480 px da Hilux 98 (`i3/wallpaper.jpg`), no meio da tela
+  sobre fundo preto pelo `feh --bg-center`.
 
 ## Restaurar
 

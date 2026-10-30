@@ -16,7 +16,8 @@ font pango:Ubuntu Sans 11
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id ~/.screenlayout/monitors.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id ~/.local/share/desktop-theme/set-wallpapers.sh
+# Papel de parede: quadrado de 480 px no meio da tela, sobre fundo preto.
+exec_always --no-startup-id feh --no-fehbg --bg-center --image-bg black ~/.config/i3/wallpaper.jpg
 exec --no-startup-id picom --daemon
 exec_always --no-startup-id python3 ~/.config/i3/sync-grouped-windows.py
 exec_always --no-startup-id /usr/bin/python3 ~/.config/i3/sync-window-icons.py
