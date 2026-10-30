@@ -20,8 +20,8 @@ em vez de pacotes extras.
   brilho do teclado.
 - Screenshot: PrtSc ou botão da barra, Flameshot copiando para a área de transferência.
 - `$mod+t` abre o Nautilus.
-- Papel de parede: recorte quadrado de 480 px da Hilux 98 (`i3/wallpaper.jpg`), no meio da tela
-  sobre fundo preto pelo `feh --bg-center`.
+- Papel de parede: `hilux-98.jpg` da pasta global [`wallpapers/`](../../wallpapers/README.md), no meio
+  da tela sobre fundo preto; `$mod+Shift+w` escolhe outro.
 
 ## Restaurar
 
@@ -32,6 +32,7 @@ sudo apt install flameshot
 cp -a .config/. "$HOME/.config/"
 mkdir -p "$HOME/.local/bin"
 cp -a .local/bin/install-nerd-symbols "$HOME/.local/bin/"
+cp -a ../../.local/bin/wallpaper "$HOME/.local/bin/"
 ~/.local/bin/install-nerd-symbols
 cp -a .Xresources .xinitrc "$HOME/"
 ~/.config/i3/apply-theme.sh

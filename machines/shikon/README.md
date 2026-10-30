@@ -23,6 +23,7 @@ Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5
 `.config/` contém i3, Polybar, Picom (incluindo shaders), Kitty, GNOME Terminal, VS Code, Cursor, Dunst, Rofi, GTK e Fontconfig.
 `.local/bin/install-mac-fonts` baixa e instala as fontes a partir dos arquivos oficiais da Apple; os arquivos das fontes não são incluídos no repositório.
 A Menlo é instalada separadamente: copie `Menlo-Regular.ttf` para `~/.local/share/fonts/menlo/` (crie a pasta se necessário) e execute `fc-cache -f`. O arquivo da fonte não é incluído no repositório. Sem Menlo, os editores usam SF Mono.
+O papel de parede deste PC agora é `laptop-beer.png`, na pasta global [`wallpapers/`](../../wallpapers/README.md).
 `.screenlayout/monitors.sh` define os monitores; `.Xresources` configura recursos do X11.
 As configurações de monitores, interface de rede e caminhos são específicas deste PC.
 

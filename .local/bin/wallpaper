@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Escolhe o papel de parede entre os da pasta wallpapers/ do dotfiles.
+#   wallpaper                   abre a lista no Rofi, com miniaturas
+#   wallpaper <arquivo>         aplica o arquivo (nome dentro da pasta ou caminho)
+#   wallpaper --restore [nome]  reaplica a última escolha; sem escolha salva, usa [nome]
+# Imagens menores que o monitor ficam centralizadas sobre preto; as demais preenchem a tela.
+set -euo pipefail
+
+dir="${WALLPAPER_DIR:-$HOME/dotfiles/wallpapers}"
+state="${XDG_STATE_HOME:-$HOME/.local/state}/wallpaper"
+
+resolve() {
+    if [[ -f "$1" ]]; then realpath -- "$1"; else realpath -- "$dir/$1"; fi
+}
+
+apply() {
+    local image size width height mode=--bg-fill
+    image=$(resolve "$1")
+    [[ -f "$image" ]] || { echo "Papel de parede não encontrado: $1" >&2; exit 1; }
+    size=$(file -b -- "$image" | grep -oE '[0-9]+ ?x ?[0-9]+' | tail -n1 | tr -d ' ')
+    width=${size%x*}; height=${size#*x}
+    # Comparar com o menor monitor conectado.
+    if read -r screen_width screen_height < <(xrandr --current |
+            grep -oE ' connected( primary)? [0-9]+x[0-9]+' | grep -oE '[0-9]+x[0-9]+' |
+            tr x ' ' | sort -n -k1,1 | head -n1) &&
+       (( width <= screen_width && height <= screen_height )); then
+        mode=--bg-center
+    fi
+    feh --no-fehbg "$mode" --image-bg black -- "$image"
+    mkdir -p -- "${state%/*}"
+    printf '%s\n' "$image" > "$state"
+}
+
+case "${1:-}" in
+    --restore)
+        saved=$(cat -- "$state" 2>/dev/null || true)
+        if [[ -n "$saved" && -f "$saved" ]]; then apply "$saved"
+        elif [[ -n "${2:-}" ]]; then apply "$2"
+        fi
+        ;;
+    "")
+        current=$(cat -- "$state" 2>/dev/null || true)
+        choice=$(
+            for image in "$dir"/*.{jpg,jpeg,png,webp}; do
+                [[ -f "$image" ]] || continue
+                printf '%s\0icon\x1f%s\n' "${image##*/}" "$image"
+            done | rofi -dmenu -i -show-icons -p "Papel de parede" \
+                -select "${current##*/}" \
+                -theme-str 'element-icon { size: 64px; } listview { lines: 5; }'
+        ) || exit 0
+        apply "$choice"
+        ;;
+    *)
+        apply "$1"
+        ;;
+esac

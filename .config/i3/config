@@ -253,8 +253,9 @@ exec_always --no-startup-id xrandr \
   --output HDMI-0 --mode 800x600 --pos 1680x0 --rotate normal
 workspace 1 outputi DP-2
 
-# wallpaper
-exec_always feh --bg-scale ~/.config/i3/wallpaper.png
+# wallpaper: $mod+Shift+w escolhe entre os de ~/dotfiles/wallpapers
+exec_always --no-startup-id ~/.local/bin/wallpaper --restore japanese-garden.png
+bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 
 # rofi power menu
 bindsym $mod+Shift+p exec rofi -show power-menu -modi power-menu:~/.config/rofi/rofi-power-menu

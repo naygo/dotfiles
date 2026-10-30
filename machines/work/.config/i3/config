@@ -16,8 +16,8 @@ font pango:Ubuntu Sans 11
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id ~/.screenlayout/monitors.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-# Papel de parede: quadrado de 480 px no meio da tela, sobre fundo preto.
-exec_always --no-startup-id feh --no-fehbg --bg-center --image-bg black ~/.config/i3/wallpaper.jpg
+# Papel de parede: reaplica a última escolha de ~/dotfiles/wallpapers ($mod+Shift+w).
+exec_always --no-startup-id ~/.local/bin/wallpaper --restore hilux-98.jpg
 exec --no-startup-id picom --daemon
 exec_always --no-startup-id python3 ~/.config/i3/sync-grouped-windows.py
 exec_always --no-startup-id /usr/bin/python3 ~/.config/i3/sync-window-icons.py
@@ -36,6 +36,7 @@ bindsym $mod+Shift+e restart
 bindsym $mod+t exec nautilus
 bindsym $mod+Shift+x exec ~/.config/i3/logout.sh
 bindsym $mod+Shift+v exec --no-startup-id copyq toggle
+bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 
 # Layout de teclado (gerenciado pelo ibus: xkb:us::eng / xkb:br::por)
 bindsym Control+space exec --no-startup-id ~/.config/i3/toggle-keyboard-layout.sh
