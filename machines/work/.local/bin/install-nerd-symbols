@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Instala a Symbols Nerd Font (só ícones, licença MIT) no diretório do usuário, sem sudo.
+set -euo pipefail
+
+dest="$HOME/.local/share/fonts/nerd-symbols"
+tmp=$(mktemp -d)
+trap 'rm -rf -- "$tmp"' EXIT
+
+curl -fsSL -o "$tmp/sym.tar.xz" \
+    https://github.com/ryanoasis/nerd-fonts/releases/latest/download/NerdFontsSymbolsOnly.tar.xz
+mkdir -p "$dest"
+tar -xJf "$tmp/sym.tar.xz" -C "$dest" --wildcards '*.ttf'
+fc-cache -f "$dest"
+fc-list | grep -i 'Symbols Nerd Font'
