@@ -34,8 +34,6 @@ inputbar {
     background-color: @panel;
 }
 prompt {
-    str: "";
-    font: "Symbols Nerd Font 11";
     text-color: @muted;
     vertical-align: 0.5;
 }
