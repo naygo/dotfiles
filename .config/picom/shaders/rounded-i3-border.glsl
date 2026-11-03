@@ -1,5 +1,5 @@
 #version 330
-// Complete the curved outline using the native i3 border color.
+// Complete the curved outline using the native i3 border color (cores dos temas dark e light).
 in vec2 texcoord;
 uniform sampler2D tex;
 uniform vec2 effective_size;
@@ -11,7 +11,12 @@ bool is_i3_border(vec3 color) {
     return distance(color, vec3(142.0, 144.0, 153.0) / 255.0) < tolerance
         || distance(color, vec3(72.0, 74.0, 80.0) / 255.0) < tolerance
         || distance(color, vec3(48.0, 49.0, 54.0) / 255.0) < tolerance
-        || distance(color, vec3(255.0, 69.0, 58.0) / 255.0) < tolerance;
+        || distance(color, vec3(255.0, 69.0, 58.0) / 255.0) < tolerance
+        // Tema light: focused, focused_inactive, unfocused, urgent.
+        || distance(color, vec3(110.0, 110.0, 115.0) / 255.0) < tolerance
+        || distance(color, vec3(184.0, 185.0, 192.0) / 255.0) < tolerance
+        || distance(color, vec3(216.0, 217.0, 222.0) / 255.0) < tolerance
+        || distance(color, vec3(255.0, 59.0, 48.0) / 255.0) < tolerance;
 }
 
 vec4 window_shader() {
