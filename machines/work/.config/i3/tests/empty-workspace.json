@@ -5,7 +5,7 @@
       "num": 1,
       "focused": false,
       "visible": false,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "1"
     },
     {
@@ -13,7 +13,7 @@
       "num": 2,
       "focused": false,
       "visible": false,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "2"
     },
     {
@@ -21,7 +21,7 @@
       "num": 3,
       "focused": false,
       "visible": false,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "3"
     },
     {
@@ -29,7 +29,7 @@
       "num": 4,
       "focused": false,
       "visible": false,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "4"
     },
     {
@@ -37,7 +37,7 @@
       "num": 5,
       "focused": false,
       "visible": false,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "5"
     },
     {
@@ -45,7 +45,7 @@
       "num": 6,
       "focused": true,
       "visible": true,
-      "output": "HDMI-0",
+      "output": "eDP-1",
       "name": "6"
     },
     {
@@ -53,7 +53,7 @@
       "num": 7,
       "focused": false,
       "visible": true,
-      "output": "DP-0",
+      "output": "HDMI-1",
       "name": "7"
     }
   ],

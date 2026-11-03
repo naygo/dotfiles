@@ -14,7 +14,6 @@ font pango:Ubuntu Sans 11
 # ─── Inicialização ───────────────────────────────────────────────────────────
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
-exec_always --no-startup-id ~/.screenlayout/monitors.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 # Papel de parede: reaplica a última escolha de ~/dotfiles/wallpapers ($mod+Shift+w).
 exec_always --no-startup-id ~/.local/bin/wallpaper --restore hilux-98.jpg
@@ -105,17 +104,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Workspaces por monitor: 1-6 no Apple (HDMI-0), 7-10 no Samsung vertical (DP-0)
-workspace $ws1 output eDP-1
-workspace $ws2 output eDP-1
-workspace $ws3 output eDP-1
-workspace $ws4 output eDP-1
-workspace $ws5 output eDP-1
-workspace $ws6 output eDP-1
-workspace $ws7 output eDP-1
-workspace $ws8 output eDP-1
-workspace $ws9 output eDP-1
-workspace $ws10 output eDP-1
+# Workspaces não são presos a monitores: cada um existe onde for aberto.
+# Ao iniciar, o notebook abre o 1 e o externo (se houver) o 2, para não começarem vazios.
+exec --no-startup-id ~/.config/i3/init-workspaces.sh
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -180,7 +171,7 @@ gaps inner 8
 gaps outer 2
 smart_gaps off
 
-# As três Polybars não são gerenciadas pelo i3: reservar espaço no HDMI-0.
+# A Polybar de cada monitor não é gerenciada pelo i3: reservar espaço no topo.
 # Inner 8 + top 38 = 46 px; barras ocupam y=6 até y=44.
 workspace $ws1 gaps top 38
 workspace $ws2 gaps top 38
@@ -188,6 +179,10 @@ workspace $ws3 gaps top 38
 workspace $ws4 gaps top 38
 workspace $ws5 gaps top 38
 workspace $ws6 gaps top 38
+workspace $ws7 gaps top 38
+workspace $ws8 gaps top 38
+workspace $ws9 gaps top 38
+workspace $ws10 gaps top 38
 
 # Cores: ~/.local/bin/theme [dark|light|toggle] troca o link theme-current.conf.
 include ~/.config/i3/theme-current.conf

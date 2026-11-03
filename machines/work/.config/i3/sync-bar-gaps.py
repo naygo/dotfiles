@@ -19,7 +19,7 @@ def build_command(workspaces, hidden=False):
     # it then emits "init", causing the listener to repeat forever. Only change
     # the current workspace; the listener updates the others as they gain focus.
     for workspace in workspaces:
-        if workspace.get("focused") and workspace["output"] == "HDMI-0":
+        if workspace.get("focused"):
             return f"gaps top current set {2 if hidden else 38}"
     return ""
 

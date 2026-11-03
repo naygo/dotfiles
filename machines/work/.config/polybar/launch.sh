@@ -29,8 +29,15 @@ if pgrep -u "$(id -u)" -x polybar >/dev/null; then
     echo "A Polybar anterior não encerrou; tente novamente." >&2
     exit 1
 fi
-for bar in main; do
-    polybar "$bar" --config="$HOME/.config/polybar/config.ini" &
+# Uma barra por monitor; a com bandeja (main) fica no monitor principal.
+primary=$(xrandr --query | awk '/ connected primary/ {print $1}')
+mapfile -t monitors < <(xrandr --query | awk '/ connected/ {print $1}')
+primary=${primary:-${monitors[0]:-eDP-1}}
+for monitor in "${monitors[@]}"; do
+    bar=secondary
+    [[ $monitor == "$primary" ]] && bar=main
+    MONITOR=$monitor polybar "$bar" --config="$HOME/.config/polybar/config.ini" &
+    sleep 0.3
 done
 # Ajustar também os workspaces criados enquanto a barra estiver escondida.
 python3 "$HOME/.config/i3/sync-bar-gaps.py" --watch &

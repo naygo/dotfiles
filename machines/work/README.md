@@ -4,7 +4,9 @@ Notebook da empresa: Ubuntu 26.04 com GNOME, i3 4.25, Polybar 3.7.2, Rofi 2.0 e 
 Baseado no [shikon](../shikon/README.md), adaptado para usar o que o GNOME já fornece
 em vez de pacotes extras.
 
-- Monitor único: eDP-1, 1366×768; interface de rede `wlp0s20f3`.
+- Monitores: notebook eDP-1 (1366×768) e externo HDMI-1, cada um com sua Polybar (a bandeja fica
+  na do monitor principal). Os workspaces não são presos a um monitor: existem onde forem abertos.
+  Ao iniciar, o notebook abre o 1 e o externo o 2 (`i3/init-workspaces.sh`). Interface de rede `wlp0s20f3`.
 - Mesmo tema macOS Graphite do shikon na Polybar, Rofi, Dunst, Kitty e i3.
 - Glass do Picom (90% de opacidade com blur) só nos aplicativos da lista em `picom.conf`:
   kitty, VS Code, Rofi, Dunst e Obsidian; os demais ficam opacos.
@@ -48,4 +50,4 @@ dunstctl reload
 ```
 
 Também são necessários i3, Picom, Kitty, Polybar, Rofi, Dunst, CopyQ, xclip e feh.
-A interface de rede e o monitor são específicos deste notebook.
+A interface de rede e os nomes dos monitores são específicos deste notebook.

@@ -52,14 +52,14 @@ class BarGapsTests(unittest.TestCase):
 
     def test_hidden_bar_uses_outer_gap(self):
         self.assertEqual(bar_gaps.build_command([
-            {"name": "6", "output": "HDMI-0", "focused": True},
+            {"name": "1", "output": "eDP-1", "focused": True},
         ], hidden=True), "gaps top current set 2")
 
-    def test_secondary_monitor_does_not_steal_focus(self):
+    def test_every_monitor_has_a_bar(self):
         self.assertEqual(bar_gaps.build_command([
-            {"name": "1", "output": "HDMI-0", "focused": False, "visible": True},
-            {"name": "7", "output": "DP-0", "focused": True},
-        ]), "")
+            {"name": "1", "output": "eDP-1", "focused": False, "visible": True},
+            {"name": "6", "output": "HDMI-1", "focused": True},
+        ]), "gaps top current set 38")
 
 
 if __name__ == "__main__":
