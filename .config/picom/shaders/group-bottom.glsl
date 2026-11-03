@@ -16,7 +16,7 @@ bool is_i3_border(vec3 color) {
 vec4 window_shader() {
     vec2 texsize = vec2(textureSize(tex, 0));
     vec4 color = texture(tex, texcoord / texsize);
-    float radius = min(16.0, min(effective_size.x, effective_size.y) * 0.5);
+    float radius = min(8.0, min(effective_size.x, effective_size.y) * 0.5);
     float x = min(texcoord.x, effective_size.x - texcoord.x);
     float y = effective_size.y - texcoord.y;
     if (x < radius && y < radius) {
