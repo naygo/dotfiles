@@ -54,6 +54,13 @@ cp -a .config/. "$HOME/.config/"
 [[ -f .Xresources ]] && cp -a .Xresources "$HOME/"
 [[ -f .xinitrc ]] && cp -a .xinitrc "$HOME/"
 
+if [[ -f "$REPO/.bashrc" ]]; then
+  if [[ -f "$HOME/.bashrc" ]] && ! cmp -s "$REPO/.bashrc" "$HOME/.bashrc"; then
+    cp -a "$HOME/.bashrc" "$HOME/.bashrc.bak"
+  fi
+  cp -a "$REPO/.bashrc" "$HOME/.bashrc"
+fi
+
 mkdir -p "$HOME/.local/bin"
 cp -a "$REPO/.local/bin/." "$HOME/.local/bin/"
 if [[ -d .local/bin ]]; then
