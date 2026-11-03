@@ -55,7 +55,7 @@ cp -a .config/. "$HOME/.config/"
 [[ -f .xinitrc ]] && cp -a .xinitrc "$HOME/"
 
 mkdir -p "$HOME/.local/bin"
-cp -a "$REPO/.local/bin/wallpaper" "$HOME/.local/bin/"
+cp -a "$REPO/.local/bin/." "$HOME/.local/bin/"
 if [[ -d .local/bin ]]; then
   cp -a .local/bin/. "$HOME/.local/bin/"
 fi
