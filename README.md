@@ -1,41 +1,41 @@
 # dotfiles
 
 Meu setup de i3 (Polybar, Picom, Kitty, Rofi, Dunst) no tema macOS Graphite, com troca dark/light.
-É **uma configuração só** para todos os computadores; o que muda entre eles fica em arquivos
-de parâmetros pequenos, incluídos em pontos fixos da configuração comum.
+É **uma configuração só** para todos os computadores. O que muda entre eles são valores
+(fontes, monitores, comandos de volume, quais janelas têm glass…), todos num único arquivo por
+máquina: [`machines/work.env`](machines/work.env) e [`machines/shikon.env`](machines/shikon.env).
 
 ## Estrutura
 
 ```
-.config/ .local/bin/ .bashrc .Xresources   configuração comum (igual em todas as máquinas)
-machines/<máquina>/                        parâmetros + arquivos exclusivos, na estrutura do $HOME
-machines/<máquina>.sh                      hooks do update.sh (instaladores do --full)
-wallpapers/                                papéis de parede compartilhados
+.config/ .local/bin/ .bashrc .Xresources .xinitrc   configuração comum, com marcadores {{NOME}}
+machines/<máquina>.env                               todos os valores da máquina
+wallpapers/                                          papéis de parede compartilhados
 ```
 
-Cada ferramenta inclui o arquivo da máquina com o mecanismo nativo dela:
+Nos pontos que mudam por máquina, os configs têm um marcador, por exemplo
+`font pango:{{FONT_UI}} 11` no i3 ou `interface = {{NET_INTERFACE}}` na Polybar. O `update.sh`
+troca cada marcador pelo valor do `.env` ao copiar para o `$HOME`. Se faltar algum valor, ele
+para antes de copiar e diz qual falta e onde é usado. Os scripts que decidem algo em tempo de
+execução (`polybar/launch.sh`, `i3/sync-bar-gaps.py`, `i3/autostart.sh`) leem
+`~/.config/dotfiles/machine.env`, a cópia do `.env` da máquina.
 
-| Config comum | Inclui | O que a máquina define |
-| --- | --- | --- |
-| `i3/config` | `i3/machine.conf` | fonte, programas iniciados, atalhos de volume/brilho/screenshot, gerenciador de arquivos, monitores dos workspaces |
-| `polybar/config.ini` | `polybar/machine.ini` | seção `[machine]` (fontes, ação do som) e o `[module/network]` (herda de `network-base`) |
-| `polybar/launch.sh`, `i3/sync-bar-gaps.py` | `polybar/machine.env` | `BAR_MONITORS` (`all` ou `primary`) e `PRIMARY_MONITOR` |
-| `picom/picom.conf` | `picom/machine.conf` | regras de glass (quais janelas ficam translúcidas) |
-| `kitty/kitty.conf` | `kitty/machine.conf` | fonte do terminal |
-| `dunst/dunstrc` | `dunst/dunstrc.d/machine.conf` | fonte das notificações |
-| `rofi/macos-glass.rasi` | `rofi/machine.rasi` | fonte (`ui-font`) e tema de ícones |
+- **Mudar algo de uma máquina só:** edite o `.env` dela.
+- **Mudar em todas:** edite a configuração comum.
+- **Novo valor por máquina:** ponha `{{NOME}}` no config e `NOME=...` em todos os `.env`.
+- **Nova máquina:** copie um `.env`, ajuste os valores e rode `./update.sh <nome>`.
 
-Para mudar algo de uma máquina só, edite o arquivo dela em `machines/<máquina>/`; para mudar em
-todas, edite a configuração comum. Os valores atuais e as particularidades de cada computador estão
-em [`machines/README.md`](machines/README.md).
+Os arquivos comuns ficam válidos só depois do `update.sh`; edite sempre no repo, não no `$HOME`.
+O `SKIP` do `.env` lista caminhos que a máquina não recebe (o work não recebe as configs do
+VS Code/Cursor, GTK, fontconfig e GNOME Terminal do shikon).
 
 ## Atualizar
 
 Depois de puxar mudanças, rode o script para reaplicar as configs:
 
 ```bash
-./update.sh            # git pull + copia comum + máquina + recarrega i3/dunst
-./update.sh --full     # também roda os instaladores pesados da máquina (fontes, dconf)
+./update.sh            # git pull + monta as configs da máquina + recarrega i3/dunst
+./update.sh --full     # também roda o FULL_INSTALL da máquina (fontes, dconf)
 ./update.sh --no-pull  # não faz git pull
 ```
 

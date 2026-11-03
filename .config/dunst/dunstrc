@@ -1,5 +1,4 @@
 # Cores em colors-{dark,light}.conf (dunstrc.d/colors.conf); troque com `theme`.
-# Fonte por máquina em dunstrc.d/machine.conf.
 # Graphite — transparência e blur aplicados pelo Picom.
 [global]
     monitor = 0
@@ -10,6 +9,7 @@
     height = (0, 300)
     notification_limit = 5
 
+    font = {{FONT_UI}} 10
     markup = full
     format = "<span foreground='#b5b7c0' size='small'>%a</span>\n<b>%s</b>\n%b"
     alignment = left

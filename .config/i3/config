@@ -20,16 +20,19 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# ─── Específico da máquina ───────────────────────────────────────────────────
-# Fonte, programas iniciados, atalhos de volume/brilho/screenshot, monitores e
-# gaps dos workspaces 7-10. Vem antes da inicialização para os execs da máquina
-# (ex.: xrandr) rodarem primeiro. Arquivo: dotfiles/machines/<máquina>/.config/i3/machine.conf
-include ~/.config/i3/machine.conf
+# Os marcadores {{…}} são trocados pelo update.sh com os valores de dotfiles/machines/<máquina>.env.
+
+# Fonte
+font pango:{{FONT_UI}} 11
 
 # ─── Inicialização ───────────────────────────────────────────────────────────
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
+# xrandr e programas da máquina (XRANDR e AUTOSTART); antes da Polybar.
+exec --no-startup-id ~/.config/i3/autostart.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+# Papel de parede: $mod+Shift+w escolhe entre os de ~/dotfiles/wallpapers.
+exec_always --no-startup-id {{WALLPAPER_CMD}}
 exec --no-startup-id picom --daemon
 exec_always --no-startup-id python3 ~/.config/i3/sync-grouped-windows.py
 exec_always --no-startup-id /usr/bin/python3 ~/.config/i3/sync-window-icons.py
@@ -43,6 +46,7 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e restart
+bindsym $mod+t exec {{FILE_MANAGER}}
 bindsym $mod+Shift+x exec ~/.config/i3/logout.sh
 bindsym $mod+Shift+t exec --no-startup-id ~/.local/bin/theme toggle
 bindsym $mod+Shift+v exec --no-startup-id copyq toggle
@@ -50,6 +54,18 @@ bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 
 # Layout de teclado (gerenciado pelo ibus: xkb:us::eng / xkb:br::por)
 bindsym Control+space exec --no-startup-id ~/.config/i3/toggle-keyboard-layout.sh
+
+# Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id {{VOLUME_UP}}
+bindsym XF86AudioLowerVolume exec --no-startup-id {{VOLUME_DOWN}}
+bindsym XF86AudioMute        exec --no-startup-id {{VOLUME_MUTE}}
+
+# Brilho
+bindsym XF86MonBrightnessUp   exec --no-startup-id {{BRIGHTNESS_UP}}
+bindsym XF86MonBrightnessDown exec --no-startup-id {{BRIGHTNESS_DOWN}}
+
+# Screenshot: mesma ação do botão da barra
+bindsym {{SCREENSHOT_KEY}} exec --no-startup-id ~/.config/polybar/scripts/capture.sh
 
 # ─── Navegação ───────────────────────────────────────────────────────────────
 
@@ -154,15 +170,10 @@ gaps inner 8
 gaps outer 2
 smart_gaps off
 
-# A Polybar não é gerenciada pelo i3: reservar espaço no topo dos workspaces com barra.
-# Inner 8 + top 38 = 46 px; barras ocupam y=6 até y=44. Os workspaces 7-10 ficam
-# no machine.conf (o shikon os põe no monitor vertical, que não tem barra).
-workspace $ws1 gaps top 38
-workspace $ws2 gaps top 38
-workspace $ws3 gaps top 38
-workspace $ws4 gaps top 38
-workspace $ws5 gaps top 38
-workspace $ws6 gaps top 38
+# Monitor de cada workspace (WS_OUTPUTS) e espaço no topo para a Polybar, que não é
+# gerenciada pelo i3: inner 8 + top 38 = 46 px; barras ocupam y=6 até y=44. Workspaces
+# presos a um monitor sem barra não reservam o espaço. Gerado pelo update.sh.
+{{I3_WORKSPACES}}
 
 # Cores: ~/.local/bin/theme [dark|light|toggle] troca o link theme-current.conf.
 include ~/.config/i3/theme-current.conf

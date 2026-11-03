@@ -14,7 +14,7 @@ def runtime_dir():
     return directory
 
 
-MACHINE_ENV = Path.home() / ".config/polybar/machine.env"
+MACHINE_ENV = Path.home() / ".config/dotfiles/machine.env"
 
 
 def machine_env():

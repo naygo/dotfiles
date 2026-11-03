@@ -1,11 +1,9 @@
 /* Launcher grafite no estilo macOS, mesma paleta da Polybar; glass aplicado pelo Picom. */
 @import "colors-current.rasi"
-/* Fonte (ui-font) e tema de ícones por máquina. */
-@import "machine.rasi"
 * {
     background-color: transparent;
     text-color: @fg;
-    font: @ui-font;
+    font: "{{FONT_UI}} {{ROFI_FONT_SIZE}}";
 }
 window {
     width: 520px;

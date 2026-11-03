@@ -30,10 +30,10 @@ if pgrep -u "$(id -u)" -x polybar >/dev/null; then
     exit 1
 fi
 # A barra com bandeja (main) fica no monitor principal; com BAR_MONITORS=all, os
-# demais ganham a secondary. BAR_MONITORS vem do machine.env da máquina.
+# demais ganham a secondary. Valores de dotfiles/machines/<máquina>.env.
 BAR_MONITORS=all
 PRIMARY_MONITOR=
-[[ -f "$HOME/.config/polybar/machine.env" ]] && . "$HOME/.config/polybar/machine.env"
+[[ -f "$HOME/.config/dotfiles/machine.env" ]] && . "$HOME/.config/dotfiles/machine.env"
 mapfile -t monitors < <(xrandr --query | awk '/ connected/ {print $1}')
 primary=${PRIMARY_MONITOR:-$(xrandr --query | awk '/ connected primary/ {print $1}')}
 primary=${primary:-${monitors[0]:-}}

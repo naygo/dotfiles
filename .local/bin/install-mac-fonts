@@ -63,7 +63,7 @@ for family in 'SF Pro Text' 'SF Mono'; do
 done
 
 # As configs (i3, Polybar, Kitty, Rofi, Dunst, GTK, fontconfig) já usam SF Pro/SF Mono
-# pelos arquivos da máquina; aqui só se ajustam as fontes do GNOME.
+# pelo machines/shikon.env; aqui só se ajustam as fontes do GNOME.
 fc-cache -f
 if command -v gsettings >/dev/null; then
     gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11' || true

@@ -1,6 +1,7 @@
 configuration {
     modi: "drun";
     show-icons: true;
+    icon-theme: "{{ICON_THEME}}";
     drun-display-format: "{name}";
     display-drun: "Aplicativos";
 }
