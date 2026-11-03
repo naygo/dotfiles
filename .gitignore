@@ -1,3 +1,10 @@
 # Arquivos temporários de editores
 *.sw?
 *~
+
+# Python
+__pycache__/
+*.pyc
+
+# Marcador local do launch.sh da Polybar
+close-old-vitals-once

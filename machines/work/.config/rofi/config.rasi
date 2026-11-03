@@ -1,9 +1,0 @@
-configuration {
-    modi: "drun";
-    show-icons: true;
-    icon-theme: "Yaru";
-    font: "Ubuntu Sans 11";
-    drun-display-format: "{name}";
-    display-drun: "Aplicativos";
-}
-@theme "macos-glass"

@@ -57,72 +57,17 @@ find "$work_dir/SF-Pro" "$work_dir/SF-Mono" -type f \
 fc-cache -f "$font_dir"
 for family in 'SF Pro Text' 'SF Mono'; do
     if [[ "$(fc-match -f '%{family}' "$family")" != *"$family"* ]]; then
-        echo "Fonte $family não encontrada após a extração; configurações preservadas." >&2
+        echo "Fonte $family não encontrada após a extração." >&2
         exit 1
     fi
 done
 
-python3 - <<'PY'
-from pathlib import Path
-from datetime import datetime
-import shutil
-import configparser
-
-home = Path.home()
-backup = home / '.config/theme-backups' / ('before-mac-fonts-' + datetime.now().strftime('%Y%m%d-%H%M%S'))
-backup.mkdir(parents=True)
-
-def save(relative, content):
-    path = home / relative
-    if path.exists():
-        destination = backup / relative
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(path, destination)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content)
-
-for relative in ('.config/i3/config', '.config/polybar/config.ini',
-                 '.config/dunst/dunstrc', '.config/rofi/config.rasi',
-                 '.config/rofi/gruvbox-glass.rasi'):
-    path = home / relative
-    save(relative, path.read_text().replace('JetBrains Mono', 'SF Pro Text'))
-
-relative = '.config/kitty/kitty.conf'
-content = (home / relative).read_text()
-content = content.replace('JetBrains Mono', 'SF Mono')
-save(relative, content)
-
-for relative in ('.config/gtk-3.0/settings.ini', '.config/gtk-4.0/settings.ini'):
-    path = home / relative
-    settings = configparser.ConfigParser(interpolation=None)
-    settings.optionxform = str
-    if path.exists():
-        settings.read(path)
-    if not settings.has_section('Settings'):
-        settings.add_section('Settings')
-    settings['Settings']['gtk-font-name'] = 'SF Pro Text 11'
-    import io
-    output = io.StringIO()
-    settings.write(output, space_around_delimiters=False)
-    save(relative, output.getvalue())
-
-save('.config/fontconfig/conf.d/60-apple-fonts.conf', '''<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig>
-  <alias><family>sans-serif</family><prefer><family>SF Pro Text</family></prefer></alias>
-  <alias><family>monospace</family><prefer><family>SF Mono</family></prefer></alias>
-</fontconfig>
-''')
-print(f'Configurações salvas. Backup: {backup}')
-PY
-
+# As configs (i3, Polybar, Kitty, Rofi, Dunst, GTK, fontconfig) já usam SF Pro/SF Mono
+# pelos arquivos da máquina; aqui só se ajustam as fontes do GNOME.
 fc-cache -f
 if command -v gsettings >/dev/null; then
     gsettings set org.gnome.desktop.interface font-name 'SF Pro Text 11' || true
     gsettings set org.gnome.desktop.interface document-font-name 'SF Pro Text 11' || true
-    gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 12' || true
+    gsettings set org.gnome.desktop.interface monospace-font-name 'SF Mono 10' || true
 fi
-i3-msg reload || true
-"$HOME/.config/polybar/launch.sh" >/tmp/polybar-mac-fonts.log 2>&1 &
-pkill -x dunst || true
-echo 'SF Pro Text nas interfaces e SF Mono no Kitty. Reabra o terminal e os aplicativos.'
+echo 'Fontes SF Pro/SF Mono instaladas. Reabra o terminal e os aplicativos.'

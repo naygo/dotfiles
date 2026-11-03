@@ -1,3 +1,7 @@
-//@theme "/usr/share/rofi/themes/gruvbox-common.rasi"
-//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
-@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+configuration {
+    modi: "drun";
+    show-icons: true;
+    drun-display-format: "{name}";
+    display-drun: "Aplicativos";
+}
+@theme "macos-glass"

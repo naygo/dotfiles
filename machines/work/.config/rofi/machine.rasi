@@ -1,0 +1,3 @@
+/* Rofi — work. Importado por macos-glass.rasi. */
+configuration { icon-theme: "Yaru"; }
+* { ui-font: "Ubuntu Sans 11"; }

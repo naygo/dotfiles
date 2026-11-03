@@ -1,0 +1,3 @@
+/* Rofi — shikon. Importado por macos-glass.rasi. */
+configuration { icon-theme: "Adwaita"; }
+* { ui-font: "SF Pro Text 12"; }
