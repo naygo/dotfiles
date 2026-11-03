@@ -22,51 +22,11 @@ shopt -s globstar
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# ─── Chroot ──────────────────────────────────────────────────────────────────
+# ─── Prompt ──────────────────────────────────────────────────────────────────
 
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# ─── Prompt (PS1) com cursor em bloco forçado ────────────────────────────────
-
-# Cores
-_RESET='\[\e[0m\]'
-_BOLD='\[\e[1m\]'
-_GREEN='\[\e[1;32m\]'
-_YELLOW='\[\e[33m\]'
-_BLUE='\[\e[35m\]'
-_AQUA='\[\e[1;36m\]'
-_FG='\[\e[38;2;255;255;255m\]'         # Neutral prompt
-_DIM='\[\e[90m\]'
-_CURSOR_BLOCK='\[\e[2 q\]'             # Cursor bloco fixo
-
-# Função para mostrar git branch no prompt
-_git_branch() {
-    local branch
-    branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-    if [ -n "$branch" ]; then
-        local status
-        status=$(git status --porcelain 2>/dev/null)
-        if [ -n "$status" ]; then
-            echo " ${branch}*"
-        else
-            echo " ${branch}"
-        fi
-    fi
-}
-
-# PS1: user@host:dir [branch] $
-PS1="${_CURSOR_BLOCK}${debian_chroot:+($debian_chroot)}"
-PS1+="${_GREEN}${_BOLD}\u${_RESET}"
-PS1+="${_DIM}@${_RESET}"
-PS1+="${_AQUA}${_BOLD}\h${_RESET}"
-PS1+="${_DIM}:${_RESET}"
-PS1+="${_YELLOW}\w${_RESET}"
-PS1+="${_BLUE}\$(_git_branch)${_RESET}"
-PS1+="${_FG} \$${_RESET} "
-
-export PS1
+# Monocromático: usa a cor de texto do tema (claro/escuro), sem git nem user@host.
+# \W = nome da pasta atual (~ na home). \e[2 q = cursor em bloco fixo.
+PS1='\[\e[2 q\]\W \$ '
 
 # Título da janela
 case "$TERM" in
