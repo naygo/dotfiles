@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# theme [dark|light|toggle] — troca os links *-current e recarrega i3, polybar, dunst, kitty e GTK.
+set -euo pipefail
+c="$HOME/.config"
+cur=$(readlink "$c/i3/theme-current.conf"); cur=${cur#theme-}; cur=${cur%.conf}
+case "${1:-toggle}" in
+    dark|light) new=$1 ;;
+    toggle) [[ $cur == dark ]] && new=light || new=dark ;;
+    *) echo "uso: theme [dark|light|toggle]" >&2; exit 1 ;;
+esac
+ln -sfn "theme-$new.conf"  "$c/i3/theme-current.conf"
+ln -sfn "colors-$new.ini"  "$c/polybar/colors-current.ini"
+ln -sfn "colors-$new.conf" "$c/dunst/colors-current.conf"
+ln -sfn "colors-$new.rasi" "$c/rofi/colors-current.rasi"
+ln -sfn "theme-$new.conf"  "$c/kitty/theme-current.conf"
+if [[ $new == dark ]]; then gtk=Adwaita-dark pref=1 scheme=prefer-dark; else gtk=Adwaita pref=0 scheme=prefer-light; fi
+for v in 3 4; do
+    [[ -f "$c/gtk-$v.0/settings.ini" ]] || continue
+    sed -i -e "s/^gtk-theme-name=.*/gtk-theme-name=$gtk/" -e "s/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=$pref/" "$c/gtk-$v.0/settings.ini"
+done
+# Recarregar (falhas fora de sessão gráfica não bloqueiam os arquivos já trocados).
+gsettings set org.gnome.desktop.interface color-scheme "$scheme" || true
+pkill -USR1 -x kitty || true
+dunstctl reload || true
+# O reload do i3 reexecuta o launch.sh do polybar (exec_always).
+i3-msg reload >/dev/null || true
+echo "tema: $new (apps GTK/Kitty já abertos podem precisar ser reabertos)"

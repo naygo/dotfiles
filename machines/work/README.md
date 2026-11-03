@@ -25,6 +25,12 @@ em vez de pacotes extras.
 - Papel de parede: `hilux-98.jpg` da pasta global [`wallpapers/`](../../wallpapers/README.md), no meio
   da tela sobre fundo preto; `$mod+Shift+w` escolhe outro.
 
+## Tema claro/escuro
+
+`Super+Shift+T` (ou `theme [dark|light|toggle]`) alterna entre dark e light: troca os links `*-current`
+(i3, Polybar, Dunst, Rofi e Kitty) e recarrega tudo e o esquema de cores do GNOME. As paletas ficam em `theme-*.conf` e `colors-*`
+(`.ini`, `.conf`, `.rasi`); o script, comum às máquinas, é o [`.local/bin/theme`](../../.local/bin/theme). O padrão é dark.
+
 ## Restaurar
 
 Faça backup das configurações existentes. Dentro desta pasta:
@@ -34,7 +40,7 @@ sudo apt install flameshot
 cp -a .config/. "$HOME/.config/"
 mkdir -p "$HOME/.local/bin"
 cp -a .local/bin/install-nerd-symbols "$HOME/.local/bin/"
-cp -a ../../.local/bin/wallpaper "$HOME/.local/bin/"
+cp -a ../../.local/bin/wallpaper ../../.local/bin/theme "$HOME/.local/bin/"
 ~/.local/bin/install-nerd-symbols
 cp -a .Xresources .xinitrc "$HOME/"
 ~/.config/i3/apply-theme.sh

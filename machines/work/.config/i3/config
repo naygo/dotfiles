@@ -35,6 +35,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e restart
 bindsym $mod+t exec nautilus
 bindsym $mod+Shift+x exec ~/.config/i3/logout.sh
+bindsym $mod+Shift+t exec --no-startup-id ~/.local/bin/theme toggle
 bindsym $mod+Shift+v exec --no-startup-id copyq toggle
 bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 
@@ -188,11 +189,8 @@ workspace $ws4 gaps top 38
 workspace $ws5 gaps top 38
 workspace $ws6 gaps top 38
 
-# classe                borda    fundo    texto    indicador janela ativa
-client.focused          #8e9099  #8e9099  #202124  #8e9099   #8e9099
-client.focused_inactive #484a50  #484a50  #f5f5f7  #484a50   #484a50
-client.unfocused        #303136  #303136  #b5b7c0  #303136   #303136
-client.urgent           #ff453a  #ff453a  #f5f5f7  #ff453a   #ff453a
+# Cores: ~/.local/bin/theme [dark|light|toggle] troca o link theme-current.conf.
+include ~/.config/i3/theme-current.conf
 
 bar {
     mode invisible

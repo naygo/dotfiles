@@ -3,10 +3,10 @@
 Configurações deste computador: Debian 13, i3 4.24, Polybar 3.7.2 e Picom 12.5.
 
 - Monitor principal: HDMI-0, 1680×1050; secundário: DP-0, 1920×1080 na vertical.
-- Gruvbox Dark; informações à esquerda, workspaces no centro, ações à direita.
+- Tema macOS Graphite (dark/light); informações à esquerda, workspaces no centro, ações à direita.
 - Aplicativos com opacidade de 90%, blur e cantos de 16 px.
 - Pílulas com fundos translúcidos e composição SOURCE para evitar linhas nas junções.
-- Notificações Gruvbox com ícones compactos, cantos de 16 px e glass do Picom.
+- Notificações com ícones compactos, cantos de 16 px e glass do Picom.
 - Launcher Rofi minimalista e centralizado, com busca simples, ícones compactos e seleção discreta.
 - Painel de volume e terminais abrem flutuando e centralizados.
 - Polybar no mesmo visual do [work](../work/README.md): workspaces só com o número (o focado em destaque, os demais apagados), título da janela apagado e relógio claro, com espaçamentos em px.
@@ -28,6 +28,12 @@ O papel de parede deste PC agora é `laptop-beer.png`, na pasta global [`wallpap
 `.screenlayout/monitors.sh` define os monitores; `.Xresources` configura recursos do X11.
 As configurações de monitores, interface de rede e caminhos são específicas deste PC.
 
+## Tema claro/escuro
+
+`Super+Shift+T` (ou `theme [dark|light|toggle]`) alterna entre dark e light: troca os links `*-current`
+(i3, Polybar, Dunst, Rofi e Kitty) e recarrega tudo e o GTK. As paletas ficam em `theme-*.conf` e `colors-*`
+(`.ini`, `.conf`, `.rasi`); o script, comum às máquinas, é o [`.local/bin/theme`](../../.local/bin/theme). O padrão é dark.
+
 ## Restaurar
 
 Faça backup das configurações existentes. Dentro desta pasta:
@@ -42,6 +48,7 @@ dconf load /org/gnome/terminal/ < .config/gnome-terminal/settings.dconf
 mkdir -p "$HOME/.screenlayout"
 cp -a .screenlayout/monitors.sh "$HOME/.screenlayout/"
 cp -a .Xresources "$HOME/.Xresources"
+cp -a ../../.local/bin/theme "$HOME/.local/bin/"
 ~/.config/i3/apply-theme.sh
 /usr/bin/python3 ~/.config/i3/sync-window-icons.py &
 dunstctl reload
