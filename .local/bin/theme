@@ -22,6 +22,6 @@ done
 gsettings set org.gnome.desktop.interface color-scheme "$scheme" || true
 pkill -USR1 -x kitty || true
 dunstctl reload || true
-# O reload do i3 reexecuta o launch.sh do polybar (exec_always).
-i3-msg reload >/dev/null || true
+# Só o restart do i3 (não o reload) reexecuta os exec_always: polybar e wallpaper.
+i3-msg restart >/dev/null || true
 echo "tema: $new (apps GTK/Kitty já abertos podem precisar ser reabertos)"

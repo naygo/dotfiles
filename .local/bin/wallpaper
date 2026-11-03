@@ -4,22 +4,25 @@
 #   wallpaper <arquivo>         aplica o arquivo (nome dentro da pasta ou caminho)
 #   wallpaper --restore [nome]  reaplica a última escolha; sem escolha salva, usa [nome]
 # Imagens menores que o monitor ficam centralizadas sobre preto (tema dark) ou sobre um
-# off-white suave (tema light, `theme light`); as demais preenchem a tela.
+# off-white suave (#e9eaee, tema light); as demais preenchem a tela.
 set -euo pipefail
 
 dir="${WALLPAPER_DIR:-$HOME/dotfiles/wallpapers}"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/wallpaper"
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-composite.png"
-light_bg="${WALLPAPER_LIGHT_BG:-#e9eaee}"
 
-theme_is_light() {
-    [[ $(readlink "$HOME/.config/i3/theme-current.conf" 2>/dev/null) == theme-light.conf ]]
+theme_bg() {
+    if [[ $(readlink "$HOME/.config/i3/theme-current.conf" 2>/dev/null) == theme-light.conf ]]; then
+        echo "${WALLPAPER_LIGHT_BG:-#e9eaee}"
+    else
+        echo "${WALLPAPER_DARK_BG:-#000000}"
+    fi
 }
 
 # Monta uma imagem do tamanho da tela com a imagem centralizada em cada monitor.
 compose() {
     mkdir -p -- "${cache%/*}"
-    python3 - "$1" "$cache" "$light_bg" <<'PY'
+    python3 - "$1" "$cache" "$bg" <<'PY'
 import re, subprocess, sys
 from PIL import Image
 src, out, color = sys.argv[1:4]
@@ -39,7 +42,8 @@ resolve() {
 }
 
 apply() {
-    local image size width height mode=--bg-fill
+    local image size width height bg mode=--bg-fill
+    bg=$(theme_bg); bg=${bg:-#000000}
     image=$(resolve "$1")
     [[ -f "$image" ]] || { echo "Papel de parede não encontrado: $1" >&2; exit 1; }
     size=$(file -b -- "$image" | grep -oE '[0-9]+ ?x ?[0-9]+' | tail -n1 | tr -d ' ')
@@ -51,9 +55,11 @@ apply() {
        (( width <= screen_width && height <= screen_height )); then
         mode=--bg-center
     fi
-    if [[ $mode == --bg-center ]] && theme_is_light && compose "$image" 2>/dev/null; then
+    if [[ $mode == --bg-center ]] && compose "$image" 2>/dev/null; then
         feh --no-fehbg --no-xinerama --bg-center -- "$cache"
     else
+        # feh só aceita black/white/checks em --image-bg: sem Pillow o fundo fica preto.
+        [[ $mode == --bg-center ]] && echo "wallpaper: sem Pillow, fundo preto (instale python3-pil)" >&2
         feh --no-fehbg "$mode" --image-bg black -- "$image"
     fi
     mkdir -p -- "${state%/*}"

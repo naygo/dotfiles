@@ -134,7 +134,7 @@ fi
 
 step "Recarregando"
 [[ -x "$HOME/.config/i3/apply-theme.sh" ]] && "$HOME/.config/i3/apply-theme.sh"
-command -v i3-msg >/dev/null && i3-msg reload >/dev/null || true
+command -v i3-msg >/dev/null && i3-msg restart >/dev/null || true
 command -v dunstctl >/dev/null && dunstctl reload || true
 
 echo
