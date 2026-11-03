@@ -9,8 +9,10 @@ wallpaper ghibli-sky.jpg           # aplica direto
 wallpaper --restore hilux-98.jpg   # reaplica a última escolha (usado pelo i3 ao iniciar)
 ```
 
-Imagens menores que o monitor ficam centralizadas sobre fundo preto; as demais preenchem a
-tela. A escolha fica salva em `~/.local/state/wallpaper`. O comando procura as imagens em
+Imagens menores que o monitor ficam centralizadas sobre fundo preto no tema dark e sobre um
+off-white suave (`#e9eaee`, mude com `WALLPAPER_LIGHT_BG`) no tema light; as demais preenchem a
+tela. No light o script monta a imagem de fundo com Python/Pillow (`python3-pil`) em
+`~/.cache/wallpaper-composite.png`; sem o Pillow, volta ao fundo preto. A escolha fica salva em `~/.local/state/wallpaper`. O comando procura as imagens em
 `~/dotfiles/wallpapers` (mude com `WALLPAPER_DIR`) e usa `feh`, `xrandr` e `rofi`.
 
 Instalação: `cp -a .local/bin/wallpaper ~/.local/bin/` a partir da raiz do repositório.

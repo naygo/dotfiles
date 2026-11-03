@@ -3,11 +3,36 @@
 #   wallpaper                   abre a lista no Rofi, com miniaturas
 #   wallpaper <arquivo>         aplica o arquivo (nome dentro da pasta ou caminho)
 #   wallpaper --restore [nome]  reaplica a última escolha; sem escolha salva, usa [nome]
-# Imagens menores que o monitor ficam centralizadas sobre preto; as demais preenchem a tela.
+# Imagens menores que o monitor ficam centralizadas sobre preto (tema dark) ou sobre um
+# off-white suave (tema light, `theme light`); as demais preenchem a tela.
 set -euo pipefail
 
 dir="${WALLPAPER_DIR:-$HOME/dotfiles/wallpapers}"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/wallpaper"
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-composite.png"
+light_bg="${WALLPAPER_LIGHT_BG:-#e9eaee}"
+
+theme_is_light() {
+    [[ $(readlink "$HOME/.config/i3/theme-current.conf" 2>/dev/null) == theme-light.conf ]]
+}
+
+# Monta uma imagem do tamanho da tela com a imagem centralizada em cada monitor.
+compose() {
+    mkdir -p -- "${cache%/*}"
+    python3 - "$1" "$cache" "$light_bg" <<'PY'
+import re, subprocess, sys
+from PIL import Image
+src, out, color = sys.argv[1:4]
+xr = subprocess.check_output(["xrandr", "--current"], text=True)
+width, height = map(int, re.search(r"current (\d+) x (\d+)", xr).groups())
+canvas = Image.new("RGB", (width, height), color)
+img = Image.open(src).convert("RGB")
+for m in re.finditer(r" connected(?: primary)? (\d+)x(\d+)\+(\d+)\+(\d+)", xr):
+    w, h, x, y = map(int, m.groups())
+    canvas.paste(img, (x + (w - img.width) // 2, y + (h - img.height) // 2))
+canvas.save(out)
+PY
+}
 
 resolve() {
     if [[ -f "$1" ]]; then realpath -- "$1"; else realpath -- "$dir/$1"; fi
@@ -26,7 +51,11 @@ apply() {
        (( width <= screen_width && height <= screen_height )); then
         mode=--bg-center
     fi
-    feh --no-fehbg "$mode" --image-bg black -- "$image"
+    if [[ $mode == --bg-center ]] && theme_is_light && compose "$image" 2>/dev/null; then
+        feh --no-fehbg --no-xinerama --bg-center -- "$cache"
+    else
+        feh --no-fehbg "$mode" --image-bg black -- "$image"
+    fi
     mkdir -p -- "${state%/*}"
     printf '%s\n' "$image" > "$state"
 }
