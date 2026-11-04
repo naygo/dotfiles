@@ -53,6 +53,7 @@ bindsym $mod+Shift+v exec --no-startup-id copyq toggle
 bindsym $mod+Shift+w exec --no-startup-id ~/.local/bin/wallpaper
 
 # Layout de teclado (gerenciado pelo ibus: xkb:us::eng / xkb:br::por)
+exec --no-startup-id ibus-daemon -drx --replace
 bindsym Control+space exec --no-startup-id ~/.config/i3/toggle-keyboard-layout.sh
 
 # Volume
